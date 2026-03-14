@@ -1,7 +1,8 @@
 {
   pkgs,
   ...
-}: {
+}:
+{
   # Common shell aliases shared between zsh and fish
   shellAliases = {
     # Modern replacements
@@ -11,20 +12,20 @@
     lt = "eza --tree --icons";
     cat = "bat";
     top = "btop";
-    
+
     # Editor aliases
     vi = "nvim";
     vim = "nvim";
-    
+
     # Utility aliases
     c = "clear";
     lg = "lazygit";
-    
+
     # Navigation aliases
     ".." = "cd ..";
     "..." = "cd ../..";
     "...." = "cd ../../..";
-    
+
     # Git aliases (basic ones, more complex ones can go in git config)
     g = "git";
     ga = "git add";

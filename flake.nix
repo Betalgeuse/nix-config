@@ -28,24 +28,26 @@
     workmux.url = "github:raine/workmux";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    catppuccin,
-    yazi,
-    ...
-  } @ inputs: let
-    lib = import ./lib inputs;
-    inherit (lib) recursiveMergeAttrs mkDarwinConfig mkUserConfig;
+  outputs =
+    {
+      self,
+      nixpkgs,
+      catppuccin,
+      yazi,
+      ...
+    }@inputs:
+    let
+      lib = import ./lib inputs;
+      inherit (lib) recursiveMergeAttrs mkDarwinConfig mkUserConfig;
 
       importedOverlays = import ./overlays inputs;
-  in
+    in
     recursiveMergeAttrs [
       {
         inherit lib;
         overlays = [
-            importedOverlays
-            yazi.overlays.default
+          importedOverlays
+          yazi.overlays.default
         ];
       }
       (mkDarwinConfig {

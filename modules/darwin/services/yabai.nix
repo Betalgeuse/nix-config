@@ -3,9 +3,11 @@
   userConfig,
   config,
   ...
-}: let
+}:
+let
   inherit (userConfig) username;
-in {
+in
+{
   # <yabai />
 
   services.jankyborders = {

@@ -4,7 +4,8 @@
   pkgs,
   flake,
   ...
-}: {
+}:
+{
   imports = [
     ../../modules/darwin
   ];

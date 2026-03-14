@@ -17,7 +17,7 @@ stdenv.mkDerivation {
     hash = "sha256-x7SIgKR6rwkoVVbaAvjFr1N7wTF3atni/d6xGLBBRN4=";
   };
 
-  buildPhase = '''';
+  buildPhase = "";
 
   installPhase = ''
     mkdir -p $out/source
@@ -28,7 +28,7 @@ stdenv.mkDerivation {
     description = "Stackline";
     homepage = "https://github.com/AdamWagner/stackline";
     license = lib.licenses.mit;
-    maintainers = [];
+    maintainers = [ ];
     platforms = lib.platforms.darwin;
   };
 }

@@ -16,11 +16,10 @@ stdenv.mkDerivation {
     hash = "sha256-F0UfNxHM389GhiPQ6/GFbeKQq5EvpiqQdvyf7ygzkPg=";
   };
 
-  buildInputs = with pkgs;
-    [
-      gcc
-      readline
-    ];
+  buildInputs = with pkgs; [
+    gcc
+    readline
+  ];
 
   buildPhase = ''
     make bin/sketchybar.so
@@ -35,7 +34,7 @@ stdenv.mkDerivation {
     description = "A Lua API for SketchyBar";
     homepage = "git@github.com:FelixKratz/SbarLua.git";
     license = lib.licenses.gpl3Only;
-    maintainers = with lib.maintainers; [davsanchez];
+    maintainers = with lib.maintainers; [ davsanchez ];
     mainProgram = "sbar-lua";
     platforms = lib.platforms.darwin;
   };

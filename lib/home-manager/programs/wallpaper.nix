@@ -4,10 +4,12 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   inherit (pkgs.stdenvNoCC.hostPlatform) isDarwin;
   cfg = config.darwin.wallpaper;
-in {
+in
+{
   options.darwin.wallpaper = {
     path = mkOption {
       type = types.str;
@@ -27,7 +29,7 @@ in {
     }
 
     (mkIf (cfg.path != "") {
-      home.activation.wallpaper = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      home.activation.wallpaper = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         #! /bin/bash
         echo "Setting wallpaper----------"
         WALLPAPER_PATH=${cfg.path}

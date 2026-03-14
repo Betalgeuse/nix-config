@@ -3,11 +3,13 @@
   userConfig,
   inputs,
   ...
-}: let
+}:
+let
   inherit (userConfig) username home;
   # username = "gangjun";
   # home = "/Users/gangjun";
-in {
+in
+{
   home.username = username;
   home.homeDirectory = home;
 
@@ -87,7 +89,7 @@ in {
     colima
     docker
     docker-buildx
-    
+
     # battery management
     aldente
 

@@ -2,9 +2,11 @@
   userConfig,
   config,
   ...
-}: let
+}:
+let
   inherit (userConfig) username;
-in {
+in
+{
   nix-homebrew = {
     enable = true;
     user = username;
@@ -15,7 +17,7 @@ in {
   homebrew = {
     enable = true;
 
-    taps = [];
+    taps = [ ];
 
     brews = [
       # <sketchybar>

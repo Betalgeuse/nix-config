@@ -5,14 +5,16 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   inherit (pkgs.stdenvNoCC.hostPlatform) isDarwin;
   cfg = config.services.homerow;
-in {
+in
+{
   options.services.homerow = {
     enable = mkEnableOption "homerow";
 
-    package = mkPackageOption pkgs "homerow" {};
+    package = mkPackageOption pkgs "homerow" { };
 
     config = {
       auto-deactivate-scrolling = mkOption {
@@ -21,7 +23,10 @@ in {
         description = "Automatic scroll deactivation";
       };
       auto-deactivate-scrolling-delay-s = mkOption {
-        type = types.oneOf [types.int types.float];
+        type = types.oneOf [
+          types.int
+          types.float
+        ];
         default = 1;
         description = "Deactivation delay";
       };
@@ -36,18 +41,28 @@ in {
         description = "Check for updates automatically";
       };
       dash-speed-multiplier = mkOption {
-        type = types.oneOf [types.int types.float];
+        type = types.oneOf [
+          types.int
+          types.float
+        ];
         default = 1.5;
         description = "Dash speed";
       };
       disabled-bundle-paths = mkOption {
-        type = types.listOf (types.oneOf [types.path types.str]);
-        default = [];
+        type = types.listOf (
+          types.oneOf [
+            types.path
+            types.str
+          ]
+        );
+        default = [ ];
         description = "Ignored applications";
-        apply = value:
-          if !(isList value)
-          then value
-          else "(${(strings.concatStringsSep "," (map (val: "\"${val}\"") value))})";
+        apply =
+          value:
+          if !(isList value) then
+            value
+          else
+            "(${(strings.concatStringsSep "," (map (val: "\"${val}\"") value))})";
       };
       enable-hyper-key = mkOption {
         type = types.bool;
@@ -100,7 +115,10 @@ in {
         description = "Scroll keys";
       };
       scroll-px-per-ms = mkOption {
-        type = types.oneOf [types.int types.float];
+        type = types.oneOf [
+          types.int
+          types.float
+        ];
         default = 1;
         description = "Scroll speed";
       };
@@ -148,18 +166,18 @@ in {
     }
 
     (mkIf cfg.enable {
-      home.packages = [cfg.package];
+      home.packages = [ cfg.package ];
 
-      darwin.defaults."com.superultra.Homerow" =
-        cfg.config
-        // {
-          "NSStatusItem Visible Item-0" = cfg.config.show-menubar-icon;
-        };
+      darwin.defaults."com.superultra.Homerow" = cfg.config // {
+        "NSStatusItem Visible Item-0" = cfg.config.show-menubar-icon;
+      };
 
       launchd.agents.homerow = {
         enable = true;
         config = {
-          ProgramArguments = ["${config.home.homeDirectory}/Applications/Home Manager Apps/${cfg.package.sourceRoot}/Contents/MacOS/Homerow"];
+          ProgramArguments = [
+            "${config.home.homeDirectory}/Applications/Home Manager Apps/${cfg.package.sourceRoot}/Contents/MacOS/Homerow"
+          ];
           KeepAlive = true;
           ProcessType = "Interactive";
           StandardOutPath = "${config.xdg.cacheHome}/homerow.log";

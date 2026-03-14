@@ -1,4 +1,8 @@
-{ lib, stdenvNoCC, fetchFromGitHub }:
+{
+  lib,
+  stdenvNoCC,
+  fetchFromGitHub,
+}:
 
 stdenvNoCC.mkDerivation rec {
   pname = "git-worktree-runner";
@@ -32,4 +36,3 @@ stdenvNoCC.mkDerivation rec {
     platforms = platforms.unix;
   };
 }
-

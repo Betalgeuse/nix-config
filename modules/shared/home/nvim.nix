@@ -1,8 +1,14 @@
-{userConfig, config, pkgs, ...}: 
+{
+  userConfig,
+  config,
+  pkgs,
+  ...
+}:
 let
   lua51 = pkgs.lua5_1;
   luarocks51 = pkgs.lua51Packages.luarocks;
-in{
+in
+{
   home.packages = with pkgs; [
     imagemagick
     ghostscript

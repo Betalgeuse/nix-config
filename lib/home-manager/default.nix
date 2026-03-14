@@ -4,7 +4,8 @@
   lib,
   inputs,
   ...
-}: {
+}:
+{
   home-manager.sharedModules = [
     # home-manager-secrets (nix flake input)
     # inputs.home-manager-secrets.homeManagerModules.home-manager-secrets

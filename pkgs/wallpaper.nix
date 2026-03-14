@@ -16,7 +16,7 @@ stdenv.mkDerivation {
     hash = "sha256-/Zj+bmqmWWGvH0Gr3QgV5+ApuW/7GBDM4IIdkYU+M+Y=";
   };
 
-  buildPhase = '''';
+  buildPhase = "";
 
   installPhase = ''
     mkdir -p $out/wallpapers
@@ -27,7 +27,7 @@ stdenv.mkDerivation {
     description = "Catppuccin Mocha Wallpapers";
     homepage = "https://github.com/orangci/walls-catppuccin-mocha";
     license = lib.licenses.mit;
-    maintainers = [];
+    maintainers = [ ];
     platforms = lib.platforms.all;
   };
 }

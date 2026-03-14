@@ -2,9 +2,11 @@
   pkgs,
   userConfig,
   ...
-}: let
+}:
+let
   yabai = pkgs.yabai.outPath + "/bin/yabai";
-in {
+in
+{
   services.skhd = {
     enable = true;
     package = pkgs.skhd;

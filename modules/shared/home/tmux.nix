@@ -3,7 +3,8 @@
   pkgs,
   userConfig,
   ...
-}: {
+}:
+{
   home.packages = [
     pkgs.yq-go
     pkgs.gitmux
@@ -29,6 +30,6 @@
   };
 
   home.file.".gitmux.conf" = {
-     source = config.lib.file.mkOutOfStoreSymlink "${userConfig.nixConfig}/modules/shared/files/tmux/gitmux.conf";
+    source = config.lib.file.mkOutOfStoreSymlink "${userConfig.nixConfig}/modules/shared/files/tmux/gitmux.conf";
   };
 }

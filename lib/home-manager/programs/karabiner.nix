@@ -4,24 +4,31 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   inherit (pkgs.stdenvNoCC.hostPlatform) isDarwin;
   cfg = config.services.karabiner;
 
   # A helper to ensure a value is a function
-  mustBeFunction = val:
-    if builtins.isFunction val
-    then true
-    else throw "Option ‘functionOption’ must be a function, got: ${val}";
+  mustBeFunction =
+    val:
+    if builtins.isFunction val then
+      true
+    else
+      throw "Option ‘functionOption’ must be a function, got: ${val}";
 
   karabiner-lib = {
-    wrapAsList = {...} @ args: [args];
+    wrapAsList = { ... }@args: [ args ];
     mkBasicRule = description: manipulators: {
       description = description;
       manipulators = manipulators;
     };
 
-    mkManipulator = {to ? [], ...} @ args:
+    mkManipulator =
+      {
+        to ? [ ],
+        ...
+      }@args:
       {
         type = "basic";
       }
@@ -29,19 +36,18 @@ with lib; let
   };
 
   loadedConfig = cfg.config karabiner-lib;
-in {
+in
+{
   # Make sure install karabiner-elements from homebrew
 
   options.services.karabiner = {
     enable = mkEnableOption "karabiner";
 
     config = mkOption {
-      type =
-        types.anything
-        // {
-          check = mustBeFunction;
-        };
-      default = {...}: {};
+      type = types.anything // {
+        check = mustBeFunction;
+      };
+      default = { ... }: { };
       description = "Karabiner config";
     };
   };
@@ -57,11 +63,15 @@ in {
     }
 
     (mkIf cfg.enable {
-      home.file = builtins.foldl' (acc: name:
+      home.file = builtins.foldl' (
+        acc: name:
         acc
         // {
-          ".config/karabiner/assets/complex_modifications/${name}.json".text = builtins.toJSON (loadedConfig.${name});
-        }) {} (builtins.attrNames loadedConfig);
+          ".config/karabiner/assets/complex_modifications/${name}.json".text = builtins.toJSON (
+            loadedConfig.${name}
+          );
+        }
+      ) { } (builtins.attrNames loadedConfig);
       # debug = (cfg.config karabiner-lib).hyper;
       # debug = "hellop";
     })

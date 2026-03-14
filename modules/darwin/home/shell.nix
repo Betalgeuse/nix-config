@@ -1,4 +1,5 @@
-{pkgs, config, ...}: let
+{ pkgs, config, ... }:
+let
   shellAliases = {
     # Modern replacements
     ls = "eza --icons";
@@ -60,7 +61,8 @@
 
     wm = "workmux";
   };
-in {
+in
+{
   programs.zsh = {
     enable = true;
     dotDir = "${config.xdg.configHome}/zsh";

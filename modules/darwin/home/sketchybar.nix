@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   # <sketchybar>
   home.packages = with pkgs; [
     lua54Packages.lua

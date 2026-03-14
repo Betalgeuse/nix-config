@@ -13,27 +13,27 @@ let
   version = "1.1.0"; # "windsurfVersion"
   hash = "c418a14b63f051e96dafb37fe06f1fe0b10ba3c8"; # "version"
 in
-  callPackage "${nixpkgs}/pkgs/applications/editors/vscode/generic.nix" rec {
-    inherit commandLineArgs useVSCodeRipgrep version;
+callPackage "${nixpkgs}/pkgs/applications/editors/vscode/generic.nix" rec {
+  inherit commandLineArgs useVSCodeRipgrep version;
 
-    pname = "windsurf";
+  pname = "windsurf";
 
-    executableName = "windsurf";
-    longName = "Windsurf";
-    shortName = "windsurf";
+  executableName = "windsurf";
+  longName = "Windsurf";
+  shortName = "windsurf";
 
-    src = fetchurl {
-      url = "https://windsurf-stable.codeiumdata.com/linux-x64/stable/${hash}/Windsurf-linux-x64-${version}.tar.gz";
-      hash = "sha256-fsDPzHtAmQIfFX7dji598Q+KXO6A5F9IFEC+bnmQzVU=";
-    };
+  src = fetchurl {
+    url = "https://windsurf-stable.codeiumdata.com/linux-x64/stable/${hash}/Windsurf-linux-x64-${version}.tar.gz";
+    hash = "sha256-fsDPzHtAmQIfFX7dji598Q+KXO6A5F9IFEC+bnmQzVU=";
+  };
 
-    sourceRoot = "Windsurf";
+  sourceRoot = "Windsurf";
 
-    tests = nixosTests.vscodium;
+  tests = nixosTests.vscodium;
 
-    updateScript = "nil";
+  updateScript = "nil";
 
-    meta = {
-      description = "The first agentic IDE, and then some";
-    };
-  }
+  meta = {
+    description = "The first agentic IDE, and then some";
+  };
+}

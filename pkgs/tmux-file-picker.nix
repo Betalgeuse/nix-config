@@ -1,4 +1,8 @@
-{ lib, stdenvNoCC, fetchFromGitHub }:
+{
+  lib,
+  stdenvNoCC,
+  fetchFromGitHub,
+}:
 
 stdenvNoCC.mkDerivation rec {
   pname = "tmux-file-picker";
@@ -28,4 +32,3 @@ stdenvNoCC.mkDerivation rec {
     platforms = platforms.unix;
   };
 }
-

@@ -9,9 +9,11 @@
   nixpkgs,
   outputs,
   ...
-}: let
+}:
+let
   inherit (userConfig) username home;
-in {
+in
+{
   # $ darwin-rebuild changelog
   system.stateVersion = 5;
 
@@ -20,7 +22,7 @@ in {
     home = home;
     isHidden = false;
     shell = pkgs.fish;
-    packages = [];
+    packages = [ ];
   };
 
   programs.zsh = {
@@ -33,7 +35,10 @@ in {
   };
   programs.fish.enable = true;
 
-  environment.shells = with pkgs; [zsh fish];
+  environment.shells = with pkgs; [
+    zsh
+    fish
+  ];
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.hostPlatform = "aarch64-darwin";
@@ -43,6 +48,7 @@ in {
   environment.systemPackages = [
     pkgs.wget
     pkgs.curl
+    pkgs.nixfmt-rfc-style
   ];
 
   home-manager = {
