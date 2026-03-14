@@ -9,10 +9,9 @@
     settings = {
       disableStartupPopups = true;
       os = {
-        editInTerminal = false;
-        open = "nvim --server /tmp/nvim-socket-$(tmux display -p '#{window_id}').pipe --remote {{filename}}; exit";
-        edit = "nvim --server /tmp/nvim-socket-$(tmux display -p '#{window_id}').pipe --remote +{{line}} {{filename}}; exit";
-        editAtLine = "nvim --server /tmp/nvim-socket-$(tmux display -p '#{window_id}').pipe --remote +{{line}} {{filename}}; exit";
+        editPreset = "nvim";
+        editInTerminal = true;
+        edit = "if [ -n \"$NVIM\" ]; then nvim --server $NVIM --remote-send '<C-\\><C-n><cmd>close<cr>' && nvim --server $NVIM --remote {{filename}}; else nvim {{filename}}; fi";
       };
       git = {
         overrideGpg = true;
