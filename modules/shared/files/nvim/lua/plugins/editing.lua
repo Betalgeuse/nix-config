@@ -3,9 +3,8 @@ return {
     "andrewferrier/debugprint.nvim",
 
     dependencies = {
-      "echasnovski/mini.nvim", -- Optional: Needed for line highlighting (full mini.nvim plugin)
-      -- ... or ...
-      "echasnovski/mini.hipatterns", -- Optional: Needed for line highlighting ('fine-grained' hipatterns plugin)
+      "nvim-mini/mini.nvim", -- Optional: Needed for line highlighting (full mini.nvim plugin)
+      "nvim-mini/mini.hipatterns", -- Optional: Needed for line highlighting ('fine-grained' hipatterns plugin)
 
       "ibhagwan/fzf-lua", -- Optional: If you want to use the `:Debugprint search` command with fzf-lua
       "nvim-telescope/telescope.nvim", -- Optional: If you want to use the `:Debugprint search` command with telescope.nvim
