@@ -36,8 +36,10 @@ cd ~/nix
 2. Apply the configuration:
 
 ```bash
-darwin-rebuild switch --flake .#kj-default
+darwin-rebuild switch --flake .#<profile>
 ```
+
+Available profiles in this repo currently include `kj-default`, `kj-default-v2`, and `zayden`.
 
 ## Repository Structure
 
@@ -107,7 +109,7 @@ This keymap is optimized for split keyboards. The left hand controls workspace n
 nix flake update
 
 # Rebuild after changes
-sudo darwin-rebuild switch --flake .#kj-default
+sudo darwin-rebuild switch --flake .#<profile>
 ```
 
 ## References

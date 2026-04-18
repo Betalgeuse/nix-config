@@ -1,2 +1,5 @@
 .sisyphus/
-result/
+.omc/
+.omx/
+.DS_Store
+result

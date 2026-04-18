@@ -12,7 +12,7 @@ This is a personal Nix configuration repository for managing a macOS system decl
 
 ```bash
 # Apply system configuration changes
-darwin-rebuild switch --flake .#kj-default
+darwin-rebuild switch --flake .#<profile>
 
 # Format Nix files (install first if needed)
 nix profile install github:kamadorueda/alejandra/3.1.0
@@ -27,7 +27,7 @@ nix profile install github:oxalica/nil
 ### Directory Structure
 
 - `flake.nix` - Main entry point defining the Darwin system configuration
-- `hosts/aarch64-darwin@kj-default/` - System-specific configuration profile
+- `hosts/aarch64-darwin@<profile>/` - System-specific configuration profile
 - `modules/darwin/` - macOS-specific configurations (system, homebrew, services)
 - `modules/shared/` - Cross-platform configurations (shell, packages, dotfiles)
 - `lib/` - Helper functions for building configurations
@@ -79,8 +79,7 @@ The system uses extensive keyboard-driven workflow with yabai:
 ## Important Notes
 
 - Target system: aarch64-darwin (Apple Silicon Mac)
-- User: gangjun
+- Choose the active host profile explicitly (`kj-default`, `kj-default-v2`, or `zayden`)
 - No project-specific development shells configured
 - System changes require `darwin-rebuild switch` to apply
 - Configuration follows declarative Nix principles
-

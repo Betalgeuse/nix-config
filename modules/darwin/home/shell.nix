@@ -57,7 +57,7 @@ let
     pnr = "pnpm run";
     pnrd = "pnpm run dev";
 
-    nvim = "nvim --listen /tmp/nvim-socket-$(tmux display -p '#{window_id}').pipe";
+    nvim = "nvim --listen /tmp/nvim-socket-$(tmux display -p '#{window_id}' 2>/dev/null || echo $$).pipe";
 
     wm = "workmux";
   };
@@ -79,10 +79,18 @@ in
 
       export XDG_CONFIG_HOME="$HOME/.config"
 
-      # Fix Xcode path for Expo compatibility
-      export DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer"
+      # Prefer full Xcode when installed, otherwise fall back to CLT.
+      if [[ -d "/Applications/Xcode.app/Contents/Developer" ]]; then
+        export DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer"
+      elif [[ -d "/Library/Developer/CommandLineTools" ]]; then
+        export DEVELOPER_DIR="/Library/Developer/CommandLineTools"
+      else
+        unset DEVELOPER_DIR
+      fi
 
-      $GHOSTTY_RESOURCES_DIR/shell-integration/zsh/ghostty-integration
+      if [[ -n "$GHOSTTY_RESOURCES_DIR" && -x "$GHOSTTY_RESOURCES_DIR/shell-integration/zsh/ghostty-integration" ]]; then
+        $GHOSTTY_RESOURCES_DIR/shell-integration/zsh/ghostty-integration
+      fi
     '';
 
     envExtra = ''
@@ -134,10 +142,14 @@ in
       set --export BUN_INSTALL "$HOME/.bun"
       set --export PATH $BUN_INSTALL/bin $PATH
 
-      set --export PATH /Users/gangjun/.opencode/bin $PATH
+      set --export PATH $HOME/.opencode/bin $PATH
 
-      # Fix Xcode path for Expo compatibility
-      set -gx DEVELOPER_DIR "/Applications/Xcode.app/Contents/Developer"
+      # Prefer full Xcode when installed, otherwise fall back to CLT.
+      if test -d /Applications/Xcode.app/Contents/Developer
+        set -gx DEVELOPER_DIR "/Applications/Xcode.app/Contents/Developer"
+      else if test -d /Library/Developer/CommandLineTools
+        set -gx DEVELOPER_DIR "/Library/Developer/CommandLineTools"
+      end
 
       # apply local serets
       if test -f ~/.config/shell-secrets.fish
@@ -230,6 +242,29 @@ in
           end
 
           functions -e __oc_find_port
+        '';
+      };
+
+      omx = {
+        description = "Launch codex in tmux with Hammerspoon notification on completion";
+        body = ''
+          set base_name (basename (pwd))
+          set path_hash (echo (pwd) | md5 | cut -c1-4)
+          set session_name "codex-$base_name-$path_hash"
+
+          set codex_cmd "codex $argv; $HOME/.codex/hooks/notify-hammerspoon.sh complete; exec fish"
+
+          if set -q TMUX
+              codex $argv
+              $HOME/.codex/hooks/notify-hammerspoon.sh complete
+          else
+              if tmux has-session -t "$session_name" 2>/dev/null
+                  tmux new-window -t "$session_name" -c (pwd) "$codex_cmd"
+                  tmux attach-session -t "$session_name"
+              else
+                  tmux new-session -s "$session_name" -c (pwd) "$codex_cmd"
+              end
+          end
         '';
       };
     };

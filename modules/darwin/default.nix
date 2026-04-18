@@ -16,6 +16,7 @@ in
 {
   # $ darwin-rebuild changelog
   system.stateVersion = 5;
+  system.primaryUser = username;
 
   users.users.${username} = {
     name = username;
@@ -48,7 +49,7 @@ in
   environment.systemPackages = [
     pkgs.wget
     pkgs.curl
-    pkgs.nixfmt-rfc-style
+    pkgs.nixfmt
   ];
 
   home-manager = {

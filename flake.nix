@@ -45,10 +45,10 @@
     recursiveMergeAttrs [
       {
         inherit lib;
-        overlays = [
-          importedOverlays
-          yazi.overlays.default
-        ];
+        overlays = {
+          default = importedOverlays;
+          yazi = yazi.overlays.default;
+        };
       }
       (mkDarwinConfig {
         profile = "kj-default";
@@ -72,5 +72,23 @@
           nixConfig = "/Users/kangjun/nix";
         };
       })
+      (mkDarwinConfig {
+        profile = "zayden";
+        system = "aarch64-darwin";
+        userConfig = mkUserConfig {
+          username = "zayden";
+          name = "Zayden";
+          email = "zzzaydenzz@gmail.com";
+          home = "/Users/zayden";
+          nixConfig = "/Users/zayden/Documents/dev-env-folder/nix-config";
+        };
+      })
+      # hostname alias so darwin-rebuild can find the config
+      {
+        darwinConfigurations."zaydens-MacBook-Pro-5797" =
+          self.darwinConfigurations.zayden;
+        darwinConfigurations."zaydens-MacBook-Pro-5956" =
+          self.darwinConfigurations.zayden;
+      }
     ];
 }

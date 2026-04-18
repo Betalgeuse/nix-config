@@ -6,13 +6,13 @@
 
 stdenvNoCC.mkDerivation rec {
   pname = "git-worktree-runner";
-  version = "2.0.0";
+  version = "2.6.0";
 
   src = fetchFromGitHub {
     owner = "coderabbitai";
     repo = "git-worktree-runner";
-    rev = "v2.0.0";
-    sha256 = "sha256-TPd+5WtEZsR6x4/OPVkrIpW7SSDJpbZbvjYR8rzdZAs=";
+    rev = "v2.6.0";
+    sha256 = "sha256-ltM/QM5sGYJdUbmZQHx7TZa829zG3s0Eh9ZHmZYNWiE=";
   };
 
   dontBuild = true;

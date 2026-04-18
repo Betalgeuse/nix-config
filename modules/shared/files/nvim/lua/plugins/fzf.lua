@@ -6,11 +6,15 @@ return {
 
       -- 🔁 update keymapping: remove alt-h, add ctrl-h
       opts.files = opts.files or {}
+      opts.files.hidden = true
+      opts.files.no_ignore = true
       opts.files.actions = opts.files.actions or {}
       opts.files.actions["alt-h"] = nil
       opts.files.actions["ctrl-h"] = { actions.toggle_hidden }
 
       opts.grep = opts.grep or {}
+      opts.grep.hidden = true
+      opts.grep.no_ignore = true
       opts.grep.actions = opts.grep.actions or {}
       opts.grep.actions["alt-h"] = nil
       opts.grep.actions["ctrl-h"] = { actions.toggle_hidden }

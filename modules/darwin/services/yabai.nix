@@ -21,10 +21,6 @@ in
     # blacklist = "Arc";
   };
 
-  environment.etc."sudoers.d/yabai".text = ''
-    ${username} ALL = (root) NOPASSWD: ${pkgs.yabai}/bin/yabai --load-sa
-  '';
-
   services.yabai = {
     enable = true;
     package = pkgs.yabai;
@@ -56,12 +52,7 @@ in
     };
 
     extraConfig = ''
-      # reference - https://github.com/rayandrew/nix-config/blob/main/nix-darwin/yabai/default.nix
-      wait4path /etc/sudoers.d/yabai
-      sudo yabai --load-sa
       launchctl unload -F /System/Library/LaunchAgents/com.apple.WindowManager.plist > /dev/null 2>&1 &
-      yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
-
 
       # setup rules
       yabai -m rule --add app="^System Settings$" manage=off
@@ -72,6 +63,7 @@ in
       yabai -m rule --add app="TickTick" manage=off
       yabai -m rule --add app="DeepL" manage=off
       yabai -m rule --add app="Finder" manage=off
+      yabai -m rule --add app="^Microsoft Excel$" role="" manage=off
       yabai -m rule --add app="^Godot$" manage=off
       yabai -m rule --add app="DaysAI Analyzer" manage=off
       yabai -m rule --add app="CleanShot X" manage=off mouse_follows_focus=off
@@ -80,6 +72,10 @@ in
       yabai -m rule --add app="Session" manage=off
       yabai -m rule --add app="Rona" manage=off
 
+      # assign apps to specific spaces on startup
+      yabai -m rule --add app="^Notion$" space=1
+      yabai -m rule --add app="^Dia$" space=2 manage=on role="AXWindow" subrole="AXStandardWindow"
+
       # mark window as scratchpad using rule and set size (scratchpad windows are manage=off automatically)
       yabai -m rule --add app="^카카오톡$" scratchpad=kakaotalk
       yabai -m rule --add app="^Spotify$" scratchpad=spotify grid=11:11:1:1:9:9
@@ -87,9 +83,6 @@ in
       yabai -m rule --add app="^Slack$" scratchpad=slack grid=11:11:1:1:9:9
       yabai -m rule --add app="^Akiflow$" title!="^Akiflow -" scratchpad=akiflow grid=11:11:1:1:9:9
       yabai -m rule --add app="^Linear$" scratchpad=linear grid=11:11:1:1:9:9
-      yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
-      yabai -m signal --add event=window_created action="sketchybar --trigger windows_on_spaces"
-      yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"
     '';
   };
 }

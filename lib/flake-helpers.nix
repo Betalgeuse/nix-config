@@ -20,7 +20,7 @@ in
         modules = [
           homeManagerShared
           {
-            nixpkgs.overlays = self.overlays;
+            nixpkgs.overlays = builtins.attrValues self.overlays;
           }
           (../. + "/hosts/${system}@${profile}")
         ];

@@ -72,6 +72,8 @@ in
 
       "raycast"
 
+      "homerow"
+
       "android-studio"
     ];
   };

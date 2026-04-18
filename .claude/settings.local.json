@@ -3,8 +3,28 @@
     "allow": [
       "Bash(find:*)",
       "Bash(rg:*)",
-      "Bash(nvim:*)"
+      "Bash(nvim:*)",
+      "Bash(open:*)",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "Bash(csrutil status:*)",
+      "Bash(yabai:*)",
+      "Bash(launchctl list:*)",
+      "Bash(launchctl stop org.nixos.yabai && launchctl start org.nixos.yabai && sleep 2 && yabai -m space --focus 2 2>&1)",
+      "Bash(launchctl stop org.nixos.yabai && sleep 3 && launchctl start org.nixos.yabai && sleep 3 && yabai -m space --focus 2 2>&1)",
+      "Bash(pgrep yabai:*)",
+      "Bash(yabai -m query --windows | python3 -c \"import json,sys; ws=json.load\\(sys.stdin\\); [print\\(f'{w[\\\\\"app\\\\\"]}: floating={w.get\\(\\\\\"is-floating\\\\\"\\)}, scratchpad={w.get\\(\\\\\"scratchpad\\\\\",\\\\\"\\\\\"\\)}'\\) for w in ws if 'slack' in w['app'].lower\\(\\) or 'Slack' in w['app']]\" 2>&1)",
+      "Bash(yabai -m query --spaces --space 2>&1 | python3 -c \"import json,sys; s=json.load\\(sys.stdin\\); print\\(f'layout: {s[\\\\\"type\\\\\"]}'\\)\" 2>&1)",
+      "Bash(nvram boot-args:*)",
+      "Bash(sketchybar:*)",
+      "Bash(yabai -m query --windows 2>&1 | python3 -c \"import sys,json; ws=json.load\\(sys.stdin\\); [print\\(f'space {w[\\\\\"space\\\\\"]}: {w[\\\\\"app\\\\\"]} \\(id:{w[\\\\\"id\\\\\"]}\\)'\\) for w in ws[:20]]\" 2>&1)",
+      "Bash(brew services:*)",
+      "Bash(pkill:*)"
     ],
     "deny": []
-  }
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "linear"
+  ]
 }

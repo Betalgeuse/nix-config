@@ -26,6 +26,8 @@ in
       hyper - 5: ${yabai} -m space --focus 5
       hyper - 6: ${yabai} -m space --focus 6
       hyper - 7: ${yabai} -m space --focus 7
+      hyper - 8: ${yabai} -m space --focus 8
+      hyper - 9: ${yabai} -m space --focus 9
 
       alt - 1: ${yabai} -m space --focus 1
       alt - 2: ${yabai} -m space --focus 2
@@ -34,6 +36,8 @@ in
       alt - 5: ${yabai} -m space --focus 5
       alt - 6: ${yabai} -m space --focus 6
       alt - 7: ${yabai} -m space --focus 7
+      alt - 8: ${yabai} -m space --focus 8
+      alt - 9: ${yabai} -m space --focus 9
 
       # -- Move window to desktop --
       shift + alt - 1: ${yabai} -m window --space 1;
@@ -43,6 +47,8 @@ in
       shift + alt - 5: ${yabai} -m window --space 5;
       shift + alt - 6: ${yabai} -m window --space 6;
       shift + alt - 7: ${yabai} -m window --space 7;
+      shift + alt - 8: ${yabai} -m window --space 8;
+      shift + alt - 9: ${yabai} -m window --space 9;
 
       #  -- Focus to window --
       alt - j: ${yabai} -m window --focus south
@@ -59,6 +65,21 @@ in
       # Move window to display
       shift + alt - s: ${yabai} -m window --display west; ${yabai} -m display --focus west;
       shift + alt - g: ${yabai} -m window --display east; ${yabai} -m display --focus east;
+
+      # -- Rectangle style window placement --
+
+      # left half
+      ctrl + alt - left: ${yabai} -m window --grid 1:2:0:0:1:1
+      # right half
+      ctrl + alt - right: ${yabai} -m window --grid 1:2:1:0:1:1
+      # top half
+      ctrl + alt - up: ${yabai} -m window --grid 2:1:0:0:1:1
+      # bottom half
+      ctrl + alt - down: ${yabai} -m window --grid 2:1:0:1:1:1
+      # center (large)
+      ctrl + alt - c: ${yabai} -m window --grid 6:6:1:1:4:4
+      # fullscreen
+      ctrl + alt - f: ${yabai} -m window --grid 1:1:0:0:1:1
 
       # -- Modifying the Layout --
 
