@@ -14,6 +14,9 @@ return {
       picker = {
         provider = "fzf-lua",
       },
+      storage = {
+        home = vim.fn.expand("~/Documents/leetcode"),
+      },
       theme = {
         normal = { fg = "#c8bfd8" },
       },
