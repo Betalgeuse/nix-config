@@ -14,6 +14,9 @@ return {
       picker = {
         provider = "fzf-lua",
       },
+      theme = {
+        normal = { fg = "#c8bfd8" },
+      },
     },
     keys = {
       { "<leader>ll", "<cmd>Leet<cr>", desc = "LeetCode" },
