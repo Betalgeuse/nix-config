@@ -12,7 +12,7 @@ return {
     },
 
     lazy = false, -- Required to make line highlighting work before debugprint is first used
-    version = "*", -- Remove if you DON'T want to use the stable version
+    version = "*",
   },
   {
     "neovim/nvim-lspconfig",
@@ -65,7 +65,7 @@ return {
   {
     "eero-lehtinen/oklch-color-picker.nvim",
     event = "VeryLazy",
-    version = "*",
+    version = "v4.1.2",
     keys = {
       -- One handed keymap recommended, you will be using the mouse
       {

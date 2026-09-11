@@ -17,6 +17,23 @@ return {
     },
     keys = {
       { "<leader>ll", "<cmd>Leet<cr>", desc = "LeetCode" },
+      {
+        "<leader>li",
+        function()
+          local session = vim.fn.inputsecret("LEETCODE_SESSION: ")
+          if session == "" then
+            return
+          end
+          local csrf = vim.fn.inputsecret("csrftoken: ")
+          if csrf == "" then
+            return
+          end
+          local value = ("LEETCODE_SESSION=%s; csrftoken=%s;"):format(session, csrf)
+          local err = require("leetcode.cache.cookie").set(value)
+          vim.notify(err and ("LeetCode login failed: " .. err) or "LeetCode login successful")
+        end,
+        desc = "Log in to LeetCode",
+      },
       { "<leader>lr", "<cmd>Leet run<cr>", desc = "Run LeetCode tests" },
       { "<leader>ls", "<cmd>Leet submit<cr>", desc = "Submit LeetCode solution" },
     },
