@@ -33,6 +33,10 @@ return {
       {
         "<leader>li",
         function()
+          local config = require("leetcode.config")
+          if not config.storage.cache then
+            config.setup()
+          end
           local session = vim.fn.inputsecret("LEETCODE_SESSION: ")
           if session == "" then
             return
