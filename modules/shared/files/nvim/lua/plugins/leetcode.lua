@@ -1,3 +1,10 @@
+local function leetcode_action(action)
+  local ok, err = pcall(require("leetcode.command")[action])
+  if not ok then
+    vim.notify(tostring(err), vim.log.levels.ERROR)
+  end
+end
+
 return {
   {
     "kawre/leetcode.nvim",
@@ -40,8 +47,20 @@ return {
         end,
         desc = "Log in to LeetCode",
       },
-      { "<leader>lr", "<cmd>Leet run<cr>", desc = "Run LeetCode tests" },
-      { "<leader>ls", "<cmd>Leet submit<cr>", desc = "Submit LeetCode solution" },
+      {
+        "<leader>lr",
+        function()
+          leetcode_action("q_run")
+        end,
+        desc = "Run LeetCode tests",
+      },
+      {
+        "<leader>ls",
+        function()
+          leetcode_action("q_submit")
+        end,
+        desc = "Submit LeetCode solution",
+      },
     },
   },
 }
