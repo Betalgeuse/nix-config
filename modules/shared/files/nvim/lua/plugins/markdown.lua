@@ -1,4 +1,41 @@
 return {
+  -- LaTeX 수식을 유니코드로 팝업 렌더링
+  {
+    "jbyuki/nabla.nvim",
+    keys = {
+      {
+        "<leader>mn",
+        function()
+          require("nabla").popup()
+        end,
+        desc = "Math popup (nabla)",
+      },
+      {
+        "<leader>mt",
+        function()
+          require("nabla").toggle_virt()
+        end,
+        desc = "Math virtual text toggle",
+      },
+    },
+  },
+
+  -- Markdown 내 수식 인라인 렌더링
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = { "markdown" },
+    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+    opts = {
+      latex = { enabled = true },
+      pipe_table = { cell = "trimmed" },
+      anti_conceal = { disabled_modes = { "n" } },
+      win_options = {
+        wrap = { default = false, rendered = false },
+        concealcursor = { default = "", rendered = "n" },
+      },
+    },
+  },
+
   {
     "3rd/diagram.nvim",
     dependencies = {
