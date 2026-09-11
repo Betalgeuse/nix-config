@@ -9,7 +9,8 @@ return {
     "xero/evangelion.nvim",
     lazy = false,
     priority = 1000,
-    init = function()
+    config = function()
+      require("evangelion").setup({ transparent = true })
       vim.cmd.colorscheme("evangelion")
     end,
   },
