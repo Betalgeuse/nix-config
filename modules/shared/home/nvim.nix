@@ -35,4 +35,6 @@ in
     source = config.lib.file.mkOutOfStoreSymlink "${userConfig.nixConfig}/modules/shared/files/nvim";
     recursive = true;
   };
+
+  home.file.".local/bin/course-nvim".source = "${courseNvim}/bin/course-nvim";
 }
