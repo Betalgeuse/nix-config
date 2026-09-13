@@ -19,6 +19,8 @@ map("n", "<C-tab>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 map("n", "gb", "<cmd>BufferLinePick<cr>", { desc = "Buffer Pick" })
 map("n", "gB", "<cmd>BufferLinePickClose<cr>", { desc = "Buffer Pick Close" })
 
+map("n", "<leader>tc", "<cmd>CourseMode<cr>", { desc = "Disable completion for coursework" })
+
 map("n", "<F5>", function()
   if vim.bo.filetype ~= "c" then
     vim.notify("F5: open a C file first", vim.log.levels.INFO)
